@@ -12,7 +12,7 @@ import static com.example.webd3102_assignment1.database.MySQLConnection.getConne
 
 public class TaskDatabase implements TasksDAO {
 
-    private static final String SQL_SELECT = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS";
+    private static final String SQL_SELECT = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS ORDER BY dueDate";
     private static final String SQL_SELECT_ONE = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS WHERE taskId=?";
     private static final String SQL_INSERT = "INSERT INTO TASKS(taskName, dueDate, category, completeStatus) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE TASKS SET taskName=?, dueDate=?, category=?, completeStatus=? WHERE taskId=?";

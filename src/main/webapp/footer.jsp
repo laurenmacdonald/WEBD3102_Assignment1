@@ -6,21 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .footer {
-        position: fixed;
-        bottom: 0;
-        width:100%;
-        height: 40px;
-        background-color: tomato;
-    }
-
-</style>
-
-<footer class="footer font-small black">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3" style="color: white">© 2019 Copyright:
-        <a href="https://www.javaguides.net/" > <strong> Java Guides </strong></a>
+<footer class="text-center text-lg-start" style="background-color:darkcyan">
+    <div class="container p-2">
+        <p class="footer-cta text-center text-uppercase py-2 ">
+           2024
+        </p>
     </div>
 </footer>
-

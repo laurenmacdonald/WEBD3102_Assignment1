@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.example.webd3102_assignment1.database.UserDatabase" %>
 <%@ page import="com.example.webd3102_assignment1.model.User" %>
 <%@ page import="java.util.List" %>
@@ -14,14 +15,6 @@
         crossorigin="anonymous">
 </head>
 <body>
-<jsp:include page="navbar.jsp"/>
-<h1><%= "Welcome to the to do list app" %></h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<a href="form.jsp">Form</a>
-<a href="list">List</a>
-<a href="dashboard">Dashboard</a>
-
-<jsp:include page="footer.jsp"/>
+<c:redirect url="/dashboard"/>
 </body>
 </html>

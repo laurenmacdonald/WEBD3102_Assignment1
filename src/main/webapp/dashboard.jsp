@@ -17,14 +17,8 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<h1><%= "Welcome to the to do list app" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<a href="form.jsp">Form</a>
-<a href="list">List</a>
-<div class="container-sm">
-    <h1>Dashboard</h1>
+<div class="container-sm p-5 min-vh-100">
+    <h1 class="heading1 mb-2">Dashboard</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
             <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
