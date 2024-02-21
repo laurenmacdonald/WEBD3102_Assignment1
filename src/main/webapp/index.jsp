@@ -1,9 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.example.webd3102_assignment1.database.UserDatabase" %>
-<%@ page import="com.example.webd3102_assignment1.model.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.webd3102_assignment1.database.TaskDatabase" %>
-<%@ page import="com.example.webd3102_assignment1.model.Task" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
