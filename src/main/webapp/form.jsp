@@ -15,8 +15,13 @@
 <html>
 <head>
     <title>To Do List</title>
+    <style>
+        .btn-primary:hover {
+            opacity: 0.75;
+        }
+    </style>
 </head>
-<body  style="background-color: #E6F3F3">
+<body style="background-color: #E6F3F3">
 <jsp:include page="navbar.jsp"/>
 <div class="container col-md-5 min-vh-100">
     <div class="card m-4">
@@ -45,8 +50,8 @@
 
                     <fieldset class="form-group">
                         <label>Task Name</label> <input type="text"
-                                                         value="<c:out value='${task.taskName}' />" class="form-control"
-                                                         name="taskName" required="required" minlength="5">
+                                                        value="<c:out value='${task.taskName}' />" class="form-control"
+                                                        name="taskName" required="required" minlength="5">
                     </fieldset>
 
                     <fieldset class="form-group">
@@ -55,28 +60,15 @@
                         <option value="medium">medium</option>
                         <option value="low">low</option>
                     </select>
-<%--                        <input type="text"--%>
-<%--                                                            value="<c:out value='${task.category}' />"--%>
-<%--                                                            class="form-control"--%>
-<%--                                                            name="category" minlength="5">--%>
                     </fieldset>
-
                     <fieldset class="form-group">
-                        <label>Task Status</label> <select class="form-control"
-                                                           name="completeStatus">
-                        <option value="false">In Progress</option>
-                        <option value="true">Complete</option>
-                    </select>
+                        <label>Task Due Date</label>
+                        <input type="date"
+                               value="<c:out value='${task.dueDate}'/>"
+                               class="form-control"
+                               name="dueDate" required="required">
                     </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Task Due Date</label> <input type="date"
-                                                            value="<c:out value='${task.dueDate}' />"
-                                                            class="form-control"
-                                                            name="dueDate" required="required">
-                    </fieldset>
-
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: darkcyan; :hover: opacity:0.5">Save</button>
                 </form>
         </div>
     </div>

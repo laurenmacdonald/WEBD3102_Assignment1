@@ -8,8 +8,29 @@ public class Task {
     private Date dueDate;
     private String category;
     private boolean completeStatus;
+    private String dueDateRelative;
+    private String dayOfWeek;
 
     // Constructor: includes all attributes
+    public Task(int taskId, String taskName, Date dueDate, String category, boolean completeStatus, String dueDateRelative) {
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.dueDate = dueDate;
+        this.category = category;
+        this.completeStatus = completeStatus;
+        this.dueDateRelative = dueDateRelative;
+    }
+
+    // Constructor: does not include taskId
+    public Task(String taskName, Date dueDate, String category, boolean completeStatus, String dueDateRelative) {
+        this.taskName = taskName;
+        this.dueDate = dueDate;
+        this.category = category;
+        this.completeStatus = completeStatus;
+        this.dueDateRelative = dueDateRelative;
+    }
+
+    // Constructor: does not include relative due date
     public Task(int taskId, String taskName, Date dueDate, String category, boolean completeStatus) {
         this.taskId = taskId;
         this.taskName = taskName;
@@ -18,7 +39,7 @@ public class Task {
         this.completeStatus = completeStatus;
     }
 
-    // Constructor: does not include taskId
+    // Constructor: does not include relative due date or task Id
     public Task(String taskName, Date dueDate, String category, boolean completeStatus) {
         this.taskName = taskName;
         this.dueDate = dueDate;
@@ -70,4 +91,19 @@ public class Task {
         this.completeStatus = completeStatus;
     }
 
+    public String getDueDateRelative() {
+        return dueDateRelative;
+    }
+
+    public void setDueDateRelative(String dueDateRelative) {
+        this.dueDateRelative = dueDateRelative;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
 }

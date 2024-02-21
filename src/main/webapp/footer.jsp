@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="text-center text-lg-start" style="background-color:darkcyan">
     <div class="container p-2">
-        <p class="footer-cta text-center text-uppercase py-2 ">
+        <p class="footer-cta text-center text-uppercase py-2 text-light">
            2024
         </p>
     </div>

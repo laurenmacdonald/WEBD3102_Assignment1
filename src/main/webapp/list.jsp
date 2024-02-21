@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>To Do List</title>
@@ -16,85 +18,101 @@
 
 </head>
 <body>
+
 <jsp:include page="navbar.jsp"/>
 <div class="container justify-content-center p-5 min-vh-100">
-    <h3 class="heading3">Your To Do List</h3>
-    <a href="<%=request.getContextPath()%>/new" class="btn btn-outline-primary mb-3">Add Task</a>
-    <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
-        <c:forEach var="task" items="${taskList}">
-            <div class="col">
-                <div class="card" style="max-width: 18rem; border-radius: 30px">
-                    <div class="card-body">
-                        <div class="row">
-                            <h5 class="card-title my-2 text-body-primary"><c:out value="${task.taskName}"/></h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
+    <h3 class="heading3">Next 7 Days</h3>
+    <div class="row row-cols-1 row-cols-lg-4 g-2 g-lg-3">
+        <c:forEach var="list" items="${taskLists}">
+            <c:choose>
+                <c:when test="${list!=null && !list.isEmpty()}">
+                    <div class="col">
+                        <div class="card" style="max-width: 25rem;">
+                            <div class="card-body">
                                 <c:choose>
-                                    <c:when test="${task.completeStatus == true}">
-                                        <p class="badge rounded-pill text-bg-success">
-                                            <i class="bi bi-check-circle"></i> Complete
-                                        </p>
+                                    <c:when test="${list[0].dueDateRelative == 'Today' || list[0].dueDateRelative == 'Tomorrow' || list[0].dueDateRelative == 'Overdue'}">
+                                        <h5 class="card-title ms-2">${list[0].dueDateRelative}</h5>
                                     </c:when>
                                     <c:otherwise>
-                                        <p class="badge rounded-pill text-bg-warning"><a
-                                                class="text-dark text-decoration-none"
-                                                href="updateComplete?taskId=<c:out value='${task.taskId}' />">
-                                            <i class="bi bi-circle"></i>
-                                            Incomplete
-                                        </a>
-                                        </p>
+                                        <h5 class="card-title ms-2">${list[0].dayOfWeek}</h5>
                                     </c:otherwise>
                                 </c:choose>
-                            </div>
-                            <div class="col-7">
-                                <c:choose>
-                                    <c:when test="${task.category == 'high'}">
-                                        <p class="badge rounded-pill bg-danger-subtle text-dark">
-                                            <c:out value='${task.category}'/>
-                                        </p>
-                                    </c:when>
-                                    <c:when test="${task.category == 'medium'}">
-                                        <p class="badge rounded-pill bg-warning-subtle text-dark">
-                                            <c:out value='${task.category}'/>
-                                        </p>
-                                    </c:when>
-                                    <c:when test="${task.category == 'low'}">
-                                        <p class="badge rounded-pill bg-success-subtle text-dark">
-                                            <c:out value='${task.category}'/>
-                                        </p>
-                                    </c:when>
-                                </c:choose>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <small class="card-text pt-3">
-                                    <i class="bi bi-calendar-event"></i>
-                                    <c:out value="${task.dueDate}"/>
-                                </small>
-                            </div>
-                            <div class="col-2">
-                                <p class="btn badge rounded-pill bg-info-subtle text-dark"><a class="text-dark"
-                                                                                              href="edit?taskId=<c:out value='${task.taskId}' />">
-                                    <i class="bi bi-pencil-square"></i>
+                                <c:forEach var="taskItem" items="${list}">
+                                    <div class="card p-1 m-2">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <c:choose>
+                                                    <c:when test="${taskItem.completeStatus == true}">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               id="taskCheckbox_${taskItem.taskId}"
+                                                               onclick="updateTaskStatus('${taskItem.taskId}', this)"
+                                                               checked>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input class="form-check-input" type="checkbox"
+                                                               id="taskCheckbox_${taskItem.taskId}"
+                                                               onclick="updateTaskStatus('${taskItem.taskId}', this)">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                            <div class="col-7">
+                                                <label for="taskCheckbox_${taskItem.taskId}"><c:out
+                                                        value="${taskItem.taskName}"/></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <a class="text-dark"
+                                                   href="delete?taskId=<c:out value='${taskItem.taskId}' />"><i
+                                                        class="bi bi-trash" aria-hidden="true"></i><span
+                                                        class="visually-hidden">Delete</span></a>
+                                                <a class="text-dark"
+                                                   href="edit?taskId=<c:out value='${taskItem.taskId}' />">
+                                                    <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                                    <span class="visually-hidden">Edit</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                <a href="new" class="card p-1 m-2 link-underline link-underline-opacity-0">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <i class="bi bi-plus-square m-1" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            Add task
+                                        </div>
+                                    </div>
                                 </a>
-                                </p>
-                            </div>
-                            <div class="col-2">
-                                <p class="btn badge rounded-pill bg-danger-subtle"><a class="text-dark"
-                                                                                                href="delete?taskId=<c:out value='${task.taskId}' />">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </c:when>
+            </c:choose>
         </c:forEach>
     </div>
 </div>
 <jsp:include page="footer.jsp"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function updateTaskStatus(taskId, checkbox) {
+        // Get the checked status of the checkbox
+        let checked = checkbox.checked;
+        let completionStatus = !!checked;
+        let url = completionStatus ? '<%=request.getContextPath()%>/updateComplete' : '<%=request.getContextPath()%>/updateIncomplete';
+        console.log(url);
+
+        // AJAX request to update the completion status
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {taskId: taskId, checked: checked},
+            success: function (response) {
+                console.log("Task status updated successfully");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error updating task status:", error);
+            }
+        });
+    }
+</script>
 </body>
 </html>

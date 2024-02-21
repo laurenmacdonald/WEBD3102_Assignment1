@@ -15,6 +15,6 @@
         crossorigin="anonymous">
 </head>
 <body>
-<c:redirect url="/dashboard"/>
+<c:redirect url="/list"/>
 </body>
 </html>
