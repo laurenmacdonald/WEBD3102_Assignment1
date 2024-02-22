@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class MySQLConnection {
 
     public static Connection getConnection() throws SQLException {
-        //sql is schema name (table)
         String url = "jdbc:mysql://localhost:3306/to_do_app";
         String uname = "root";
         String pass = "";

@@ -5,11 +5,7 @@
          version="6.0">
     <servlet>
         <servlet-name>TaskController</servlet-name>
-        <servlet-class>com.example.webd3102_assignment1.TaskController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DashboardServlet</servlet-name>
-        <servlet-class>com.example.webd3102_assignment1.DashboardServlet</servlet-class>
+        <servlet-class>com.example.webd3102_assignment1.TaskServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TaskController</servlet-name>
@@ -19,12 +15,10 @@
         <servlet-name>TaskController</servlet-name>
         <url-pattern>/edit</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>TaskController</servlet-name>
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>TaskController</servlet-name>
         <url-pattern>/update</url-pattern>
@@ -40,9 +34,5 @@
     <servlet-mapping>
         <servlet-name>TaskController</servlet-name>
         <url-pattern>/updateComplete</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DashboardServlet</servlet-name>
-        <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
 </web-app>

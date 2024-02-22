@@ -11,7 +11,6 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous">
-
 <html>
 <head>
     <title>To Do List</title>
@@ -26,13 +25,13 @@
 <div class="container col-md-5 min-vh-100">
     <div class="card m-4">
         <div class="card-body">
+            <%-- If task is not null, then edit logic, else add new task --%>
             <c:if test="${task != null}">
             <form action="update" method="post">
                 </c:if>
                 <c:if test="${task == null}">
                 <form action="insert" method="post">
                     </c:if>
-
                     <caption>
                         <h2>
                             <c:if test="${task != null}">
@@ -43,35 +42,38 @@
                             </c:if>
                         </h2>
                     </caption>
-
                     <c:if test="${task != null}">
                         <input type="hidden" name="taskId" value="<c:out value='${task.taskId}' />"/>
                     </c:if>
 
                     <fieldset class="form-group">
-                        <label>Task Name</label> <input type="text"
-                                                        value="<c:out value='${task.taskName}' />" class="form-control"
-                                                        name="taskName" required="required" minlength="5">
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <label>Priority</label> <select class="form-control" name="category">
-                        <option value="high">high</option>
-                        <option value="medium">medium</option>
-                        <option value="low">low</option>
-                    </select>
+                        <label for="taskName">Task Name</label>
+                            <input type="text" value="<c:out value='${task.taskName}' />" class="form-control"
+                                   name="taskName" required="required" minlength="5" id="taskName">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label>Task Due Date</label>
-                        <input type="date"
-                               value="<c:out value='${task.dueDate}'/>"
-                               class="form-control"
-                               name="dueDate" required="required">
+                        <label for="taskPriority">Priority</label>
+                            <select class="form-control" name="category" id="taskPriority">
+                                <option value="high">high</option>
+                                <option value="medium">medium</option>
+                                <option value="low">low</option>
+                            </select>
                     </fieldset>
-                    <button type="submit" class="btn btn-primary" style="background-color: darkcyan; :hover: opacity:0.5">Save</button>
+                    <fieldset class="form-group">
+                        <label for="taskDueDate">
+                            Task Due Date
+                        </label>
+                            <input type="date"
+                                   value="<c:out value='${task.dueDate}'/>"
+                                   class="form-control"
+                                   name="dueDate" required="required"
+                            id="taskDueDate">
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary" style="background-color: darkcyan;">Save</button>
                 </form>
         </div>
     </div>
 </div>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

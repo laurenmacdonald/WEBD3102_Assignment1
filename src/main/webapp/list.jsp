@@ -15,20 +15,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
-
 </head>
 <body>
-
 <jsp:include page="navbar.jsp"/>
 <div class="container justify-content-center p-5 min-vh-100">
     <h3 class="heading3">Next 7 Days</h3>
     <div class="row row-cols-1 row-cols-lg-4 g-2 g-lg-3">
+        <%--Iterate through list of lists, when the list is not null and not empty, create a card for each list (day)--%>
         <c:forEach var="list" items="${taskLists}">
             <c:choose>
                 <c:when test="${list!=null && !list.isEmpty()}">
                     <div class="col">
                         <div class="card" style="max-width: 25rem;">
                             <div class="card-body">
+                                    <%-- Display day of the week (Monday, Friday, etc.), unless 'Today', 'Tomorrow' or 'Overdue' --%>
                                 <c:choose>
                                     <c:when test="${list[0].dueDateRelative == 'Today' || list[0].dueDateRelative == 'Tomorrow' || list[0].dueDateRelative == 'Overdue'}">
                                         <h5 class="card-title ms-2">${list[0].dueDateRelative}</h5>
@@ -37,10 +37,20 @@
                                         <h5 class="card-title ms-2">${list[0].dayOfWeek}</h5>
                                     </c:otherwise>
                                 </c:choose>
+                                    <%-- If the task is not overdue, display the date for the card.--%>
+                                <c:if test="${list[0].dueDateRelative!='Overdue'}">
+                                    <h6 class="card-subtitle ms-2 text-body-secondary">${list[0].dueDate}</h6>
+                                </c:if>
+                                    <%-- Iterate through each task in the list to display on the card. If the task is overdue, display the date above each task. --%>
                                 <c:forEach var="taskItem" items="${list}">
+                                    <c:if test="${list[0].dueDateRelative =='Overdue'}">
+                                        <h6 class="card-subtitle ms-2 text-body-secondary">${taskItem.dueDate}</h6>
+                                    </c:if>
                                     <div class="card p-1 m-2">
                                         <div class="row">
                                             <div class="col-2">
+                                                    <%-- Checkbox logic for task completion - will change the status from true if checked --%>
+                                                    <%-- JQuery logic at bottom of page --%>
                                                 <c:choose>
                                                     <c:when test="${taskItem.completeStatus == true}">
                                                         <input class="form-check-input" type="checkbox"
@@ -59,6 +69,7 @@
                                                 <label for="taskCheckbox_${taskItem.taskId}"><c:out
                                                         value="${taskItem.taskName}"/></label>
                                             </div>
+                                                <%-- Actions delete and edit --%>
                                             <div class="col-3">
                                                 <a class="text-dark"
                                                    href="delete?taskId=<c:out value='${taskItem.taskId}' />"><i
@@ -72,6 +83,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
+                                    <%-- Add new task link --%>
                                 <a href="new" class="card p-1 m-2 link-underline link-underline-opacity-0">
                                     <div class="row">
                                         <div class="col-2">
@@ -91,8 +103,10 @@
     </div>
 </div>
 <jsp:include page="footer.jsp"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+<%-- JQuery function to update completion status depending on whether checkbox is clicked. --%>
     function updateTaskStatus(taskId, checkbox) {
         // Get the checked status of the checkbox
         let checked = checkbox.checked;
@@ -104,7 +118,7 @@
         $.ajax({
             url: url,
             type: 'POST',
-            data: {taskId: taskId, checked: checked},
+            data: {taskId: taskId},
             success: function (response) {
                 console.log("Task status updated successfully");
             },
