@@ -6,7 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer class="text-center text-lg-start" style="background-color:darkcyan">
+<head>
+    <style><%@include file="styles.css"%></style>
+</head>
+<footer class="footer text-center text-lg-start">
     <div class="container p-2">
         <p class="footer-cta text-center text-uppercase py-2 text-light">
            2024

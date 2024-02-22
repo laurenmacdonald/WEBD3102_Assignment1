@@ -54,6 +54,9 @@ public class TaskServlet extends HttpServlet {
                 case "/list":
                     listsByDue(request,response);
                     break;
+                case "/today":
+                    listToday(request, response);
+                    break;
                 case "/updateComplete":
                     updateToComplete(request, response);
                     break;
@@ -70,6 +73,13 @@ public class TaskServlet extends HttpServlet {
         }
     }
 
+    private void listToday(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Task> todaysTasks = taskDatabase.selectToday();
+        request.setAttribute("todaysTasks", todaysTasks);
+        // forward to list page (reload)
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/today.jsp");
+        dispatcher.forward(request, response);
+    }
     /**
      *
      * @param request

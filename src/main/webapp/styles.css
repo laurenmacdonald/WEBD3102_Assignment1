@@ -1,0 +1,40 @@
+.add-task-card:hover{
+    background-color: #D8C5E7;
+    border-color: #542E71;
+    transition: 0.3s
+}
+.alert{
+    background-color: #D8C5E7;
+    border-color: #542E71;
+}
+.btn-primary{
+    background-color: #542E71;
+    border-color: #542E71;
+}
+.btn-primary:hover {
+    opacity: 0.75 !important;
+}
+
+.card-title{
+    font-size: 1.5rem;
+}
+.card-subtitle{
+    font-size: 1rem;
+}
+.day-card{
+    max-width: 25rem;
+}
+.form-body{
+    background-color: #D8C5E7;
+}
+.navbar, .footer{
+    background-color: #542E71;
+}
+.nav-link{
+    color: #D8C5E7;
+}
+.nav-link:hover{
+    color: #FFFFFF;
+    transition: 0.3s
+}
+

@@ -15,6 +15,7 @@ import static com.example.webd3102_assignment1.database.MySQLConnection.getConne
 public class TaskDatabase implements TasksDAO {
     private static final String SQL_SELECT = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS ORDER BY dueDate";
     private static final String SQL_SELECT_ONE = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS WHERE taskId=?";
+    private static final String SQL_SELECT_TODAY = "SELECT taskId, taskName, dueDate, category, completeStatus FROM TASKS WHERE dueDate = CURRENT_DATE;";
     private static final String SQL_INSERT = "INSERT INTO TASKS(taskName, dueDate, category, completeStatus) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE TASKS SET taskName=?, dueDate=?, category=?, completeStatus=? WHERE taskId=?";
     private static final String SQL_UPDATE_STATUS = "UPDATE TASKS SET completeStatus=? WHERE taskId=?";
@@ -208,7 +209,31 @@ public class TaskDatabase implements TasksDAO {
         }
         return task;
     }
+    @Override
+    public List<Task> selectToday() throws SQLException {
+        Connection conn;
+        PreparedStatement preparedStatement;
+        ResultSet rs;
+        List<Task> todaysTasks = new ArrayList<>();
+        try{
+            conn = getConnection();
+            preparedStatement = conn.prepareStatement(SQL_SELECT_TODAY);
+            rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                todaysTasks.add(new Task(
+                        rs.getInt("taskId"),
+                        rs.getString("taskName"),
+                        rs.getDate("dueDate"),
+                        rs.getString("category"),
+                        rs.getBoolean("completeStatus")
+                ));
+            }
+        } catch (Exception ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return todaysTasks;
 
+    }
     /**
      *
      * @return

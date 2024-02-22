@@ -7,20 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous">
-<html>
+
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
-    <style>
-        .btn-primary:hover {
-            opacity: 0.75;
-        }
-    </style>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <style><%@include file="styles.css"%></style>
 </head>
-<body style="background-color: #E6F3F3">
+<body class="form-body">
 <jsp:include page="navbar.jsp"/>
 <div class="container col-md-5 min-vh-100">
     <div class="card m-4">
@@ -33,14 +32,14 @@
                 <form action="insert" method="post">
                     </c:if>
                     <caption>
-                        <h2>
+                        <h1>
                             <c:if test="${task != null}">
                                 Edit Task
                             </c:if>
                             <c:if test="${task == null}">
                                 Add New Task
                             </c:if>
-                        </h2>
+                        </h1>
                     </caption>
                     <c:if test="${task != null}">
                         <input type="hidden" name="taskId" value="<c:out value='${task.taskId}' />"/>
@@ -69,7 +68,7 @@
                                    name="dueDate" required="required"
                             id="taskDueDate">
                     </fieldset>
-                    <button type="submit" class="btn btn-primary" style="background-color: darkcyan;">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
         </div>
     </div>

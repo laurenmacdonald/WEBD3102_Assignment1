@@ -12,7 +12,7 @@ public interface TasksDAO {
     int updateToIncomplete(int taskId) throws SQLException;
     int delete(int taskId) throws SQLException;
     Task select(int taskId) throws SQLException;
-
+    List<Task> selectToday() throws SQLException;
     List<Task> selectDueRelative() throws SQLException;
 
 }
