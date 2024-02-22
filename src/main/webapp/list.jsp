@@ -22,11 +22,11 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-
 <div class="container justify-content-center p-5 min-vh-100">
     <h1 class="heading1">Next 7 Days</h1>
     <div class="row row-cols-1 row-cols-lg-4 g-2 g-lg-3">
         <%--Iterate through list of lists, when the list is not null and not empty, create a card for each list (day)--%>
+        <jsp:useBean id="taskLists" scope="request" type="java.util.List"/>
         <c:forEach var="list" items="${taskLists}">
             <jsp:useBean id="dueDate" class="java.util.Date" />
             <fmt:formatDate value="${list[0].dueDate}" type="date" var="formattedDueDate"/>

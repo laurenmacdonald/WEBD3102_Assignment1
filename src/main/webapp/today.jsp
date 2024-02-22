@@ -33,6 +33,7 @@
                 <div class="card-body">
                     <h2 class="card-title ms-2">Today</h2>
                     <h3 class="card-subtitle ms-2 text-body-secondary">${formattedDate}</h3>
+                    <jsp:useBean id="todaysTasks" scope="request" type="java.util.List"/>
                     <c:choose>
                         <c:when test="${todaysTasks == null || todaysTasks.isEmpty()}">
                             <div class="alert m-2" role="alert">

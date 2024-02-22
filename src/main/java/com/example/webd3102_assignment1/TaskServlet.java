@@ -22,15 +22,12 @@ import java.util.List;
 @WebServlet("/")
 public class TaskServlet extends HttpServlet {
     private TaskDatabase taskDatabase;
-
     public void init() {
         taskDatabase = new TaskDatabase();
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath();
         try {
