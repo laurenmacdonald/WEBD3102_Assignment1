@@ -1,6 +1,6 @@
 # To Do Web Application
 
-> **Completed for WEBD3201 Assignment 1*
+> **Completed for WEBD3201 Assignment 1**
 >
 > Lauren MacDonald, February 2024
 >
